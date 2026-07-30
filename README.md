@@ -142,6 +142,8 @@ Early architecture and research stage.
 ## Licence
 licensing is currently under review pending an audit of all referenced hdl and hardware sources (reads: i am trying to figure it out, please be patient, thank you). intended licensing model is:
 
-- hdl and firmware: GNU GPLv3
-- hardware design files: CERN Open Hardware Licence Version 2 — Strongly Reciprocal
-- documentation: Creative Commons Attribution-ShareAlike 4.0
+| Component | License | Badge |
+| :--- | :--- | :--- |
+| **HDL & Firmware** | [GNU GPLv3](LICENSE-GPL) | [![License: GPL v3](https://shields.io)](https://gnu.org) |
+| **Hardware Design Files** | [CERN-OHL-S-2.0](LICENSE-CERN) | [![License: CERN-OHL-S-v2](https://shields.io)](https://spdx.org/licenses/CERN-OHL-S-2.0.html) |
+| **Documentation** | [CC BY-SA 4.0](LICENSE-CC) | [![CC BY-SA 4.0](https://creativecommons.org)](https://creativecommons.org) |
