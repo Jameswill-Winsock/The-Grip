@@ -28,6 +28,7 @@ first hardware milestone is to:
 - Audio and floppy support
 - dos, linux, win 95 & win 98 compatibility
 - optionally half life 2 support as a stretch goal (for the guy whose spreadsheets ran so well)
+- extremely long term unnecessary stretch goal: run [Infer](https://github.com/TheCustomFHD/Infer) and generate text using qwen3.5 on the finished motherboard
 
 ## Dev stages
 
