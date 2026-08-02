@@ -114,3 +114,29 @@ example group:
 - BE3# selects 0x1003
 
 note that BE0# through BE3# are four seperate pins altogether, not two wires like you'd typically see for A1 and A0 to do the byte selection work.
+
+
+## teh fsm
+lets start with the first reset vector read:
+1. cpu lowers ADS#
+2. fpga saves the address
+3. pass address to address decoder
+4. decoder determines where to go (for now its just boot rom after reset)
+5. fpga asks the bootrom for data by asserting that it now has a valid request
+6. fpga waits until the rom answers response ready, and keep request_valid asserted on boot rom, and no lowering RDY#
+7. fpga saves data to temp mem, places data on D31–D0 (for a read) (for a write you obviously dont drive the data line and just wait)
+8. fpga lowers RDY#
+9. cpu accepts the data
+10. fpga stops driving data and waits again
+
+So, overview of the mealy fsm:
+| Phase              | What we waiting for?   | What do we save?     | What do we output?  | What ends this phase?   |
+| ------------------ | ---------------------- | -------------------- | ------------------- | ----------------------- |
+| Waiting for CPU    | `ADS# = 0`             | Address and controls | Nothing             | `ADS#` becomes low      |
+| Sending request    | Nothing                | Possibly write data  | `request_valid = 1` | Request has been issued |
+| Waiting for memory | `response_ready = 1`   | Returned read data   | Keep request active | Memory responds         |
+| Answering CPU      | CPU clock edge         | Nothing              | Data bus and `RDY#` | CPU accepts response    |
+| Cleanup            | Bus becomes idle       | Nothing              | Release everything  | Return to waiting       |
+
+Here waveform lah no more
+![alt text](waveform.jpg)
