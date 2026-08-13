@@ -1,4 +1,5 @@
 #include "display.h"
+#include "cpu.h"
 #include "machine.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
@@ -105,6 +106,9 @@ int main(int argc, char **argv)
             "you stupid you supplied no bios, continuing with blank FF ROM.\n"
         );
     }
+    if (cpu_init() != 0) {
+    return 1;
+    }
     if (test_ram() != 0) {
         return 1;
     }
@@ -119,15 +123,14 @@ int main(int argc, char **argv)
     printf("  -    reduce bezel size\n");
     printf("  =    increase bezel size\n");
     while (display_process_events()) {
-        display_present(
-            machine_vram_const(),
-            VRAM_SIZE
-        );
+        cpu_run_slice(20000);
+        display_present(machine_vram_const(), VRAM_SIZE);
 
         // ~60 Hz host refresh
         // THIS HAS NOTHING TO DO WITH EVENTUAL LCD/8088 TIMING FUCK OFF
         SDL_Delay(16);
     }
+    cpu_shutdown();
     display_shutdown();
     return 0;
 }

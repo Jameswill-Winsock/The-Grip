@@ -21,7 +21,7 @@
 #define RAM_SIZE 0X08000
 // #define RAM_SIZE 0x80000 for when i get 512kb ram later
 #define ROM_BASE 0XF8000
-#define ROM_SIZE 0x80000
+#define ROM_SIZE 0x8000u
 
 #define VIDEO_WIDTH (PANEL_WIDTH*PANEL_COUNT)
 #define VIDEO_HEIGHT PANEL_HEIGHT
