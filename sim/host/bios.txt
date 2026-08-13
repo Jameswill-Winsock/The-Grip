@@ -1,0 +1,23 @@
+start:
+    cli
+
+    ; debug G
+    mov dx, 0x00E9
+    mov al, 'G'
+    out dx, al
+
+    ; fill entire Grip VRAM
+    mov ax, 0xB800
+    mov es, ax
+    xor di, di
+
+    mov al, 0xFF
+    mov cx, 6144
+
+.fill:
+    stosb
+    loop .fill
+
+.hang:
+    hlt
+    jmp .hang
